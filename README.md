@@ -18,6 +18,8 @@ Open `http://localhost:4173`.
 
 AGE includes a `render.yaml` Blueprint for deployment as a Render web service. Push this project to its own GitHub repository, create a new Render Blueprint from that repository, and Render will build the Python dependencies, start the AGE server, check `/health`, and provide a public `onrender.com` URL.
 
+[Deploy AGE Methodology on Render](https://dashboard.render.com/blueprint/new?repo=https%3A%2F%2Fgithub.com%2FCybersecurityMom%2Fage-methodology)
+
 The server reads Render's `PORT` environment variable and binds to `0.0.0.0` in the hosted environment. Local development continues to use `127.0.0.1:4173`.
 
 ## Methodology
