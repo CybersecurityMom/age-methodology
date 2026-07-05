@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="AGE Methodology, a structured, evidence-first review workspace for public AI governance documentation."
+    />
+    <title>AGE Methodology</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar" aria-label="Primary navigation">
+        <a class="brand" href="#" aria-label="AGE Methodology home">
+          <span class="brand-mark" aria-hidden="true">{</span>
+          <span>
+            <strong>AGE</strong>
+            <small>Methodology</small>
+            <em>by AQ’S Corner LLC</em>
+          </span>
+        </a>
+
+        <nav class="nav-list">
+          <button class="nav-item active" data-view="workspace">
+            <span class="nav-icon">⌁</span> Review workspace
+          </button>
+          <button class="nav-item" data-view="methodology">
+            <span class="nav-icon">◫</span> Methodology
+          </button>
+          <button class="nav-item" data-view="history">
+            <span class="nav-icon">◷</span> Review history
+          </button>
+        </nav>
+
+        <div class="sidebar-note">
+          <span class="eyebrow">Evidence first</span>
+          <p>Evaluate what is disclosed, never what is merely implied.</p>
+        </div>
+
+        <div class="profile">
+          <div class="avatar">AG</div>
+          <div><strong>Governance reviewer</strong><small>Local workspace</small></div>
+          <span>•••</span>
+        </div>
+      </aside>
+
+      <main class="main">
+        <header class="topbar">
+          <div>
+            <span class="eyebrow">AI Governance Evidence</span>
+            <h1 id="page-title">Review workspace</h1>
+          </div>
+          <div class="top-actions">
+            <span class="privacy-chip"><span></span> Private by design</span>
+            <button class="button secondary" id="new-review">New review</button>
+          </div>
+        </header>
+
+        <section id="workspace-view" class="view active">
+          <div class="intro-row">
+            <div>
+              <h2>Start with the document.<br />Stay with the evidence.</h2>
+              <p>Assess public AI governance claims with a consistent, transparent methodology.</p>
+            </div>
+          </div>
+
+          <div class="workflow" aria-label="Review steps">
+            <div class="workflow-step active"><span>1</span><div><small>Input</small><strong>Source document</strong></div></div>
+            <div class="workflow-line"></div>
+            <div class="workflow-step"><span>2</span><div><small>Review</small><strong>Evidence analysis</strong></div></div>
+            <div class="workflow-line"></div>
+            <div class="workflow-step"><span>3</span><div><small>Output</small><strong>Governance brief</strong></div></div>
+          </div>
+
+          <div id="input-state" class="workspace-grid">
+            <section class="panel document-panel">
+              <div class="panel-head">
+                <div>
+                  <span class="step-label">01 / Source</span>
+                  <h3>Document under review</h3>
+                </div>
+                <span class="char-count" id="char-count">0 characters</span>
+              </div>
+
+              <div class="field-row">
+                <label>
+                  Document title <span>Optional</span>
+                  <input id="document-title" type="text" placeholder="e.g. Responsible AI Transparency Report 2026" />
+                </label>
+                <label>
+                  Document type
+                  <select id="document-type">
+                    <option>Responsible AI statement</option>
+                    <option>Independent AI assessment</option>
+                    <option>Model card</option>
+                    <option>System card</option>
+                    <option>Trust center documentation</option>
+                    <option>Privacy documentation</option>
+                    <option>Technical documentation</option>
+                    <option>Other governance document</option>
+                  </select>
+                </label>
+              </div>
+
+              <div class="source-tabs" role="tablist" aria-label="Document source">
+                <button class="source-tab active" data-source="paste" role="tab">Paste text</button>
+                <button class="source-tab" data-source="url" role="tab">Read from URL</button>
+                <button class="source-tab" data-source="file" role="tab">Upload file</button>
+              </div>
+              <p class="source-prompt">Add a public AI assessment summary, responsible AI statement, model or system card, trust center page, or related governance document. Not ready? Load the worked example.</p>
+
+              <div class="source-panel active" id="paste-source">
+                <label class="document-label" for="document-text">Paste documentation</label>
+                <div class="textarea-wrap">
+                  <textarea id="document-text" placeholder="Paste the full text of the publicly available governance document here…"></textarea>
+                  <div class="textarea-footer">
+                    <span>Text is analyzed locally and is not stored or transmitted.</span>
+                    <button class="text-button" id="load-sample">Use example</button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="source-panel" id="url-source">
+                <label class="document-label" for="document-url">Public webpage URL</label>
+                <div class="url-entry">
+                  <input id="document-url" type="text" inputmode="url" placeholder="example.org/responsible-ai-report" />
+                  <button class="button primary" id="import-url">Read webpage</button>
+                </div>
+                <div class="source-help">
+                  <strong>Table-aware import</strong>
+                  <p>Paste a full URL, a www address, or a domain and path. AGE uses a layered reader for standard, blocked, and JavaScript-rendered public pages. Tables found in HTML are converted into labeled rows. Login-protected content remains upload-only.</p>
+                </div>
+                <p class="source-status" id="url-status"></p>
+              </div>
+
+              <div class="source-panel" id="file-source">
+                <label class="upload-zone" for="document-file">
+                  <span class="upload-icon">⇧</span>
+                  <strong>Choose a document</strong>
+                  <small>HTML, TXT, Markdown, or CSV · Tables in HTML and CSV are preserved as structured rows</small>
+                  <input id="document-file" type="file" accept=".html,.htm,.txt,.md,.csv,text/html,text/plain,text/csv" />
+                </label>
+                <p class="source-status" id="file-status"></p>
+              </div>
+
+              <div class="callout">
+                <span class="callout-icon">i</span>
+                <div><strong>Evidence boundary</strong><p>AGE evaluates only the text provided. An absent disclosure should be treated as “not found in the provided text,” not as proof that the evidence does not exist.</p></div>
+              </div>
+              <div class="import-summary hidden" id="import-summary" aria-live="polite">
+                <div><span class="success-dot"></span><strong>Document imported successfully</strong></div>
+                <div class="import-stats" id="import-stats"></div>
+              </div>
+
+              <div class="panel-actions">
+                <span id="validation-message">Add documentation or use the example to begin.</span>
+                <button class="button primary" id="analyze-button" disabled>Analyze documentation <span>→</span></button>
+              </div>
+            </section>
+
+            <aside class="panel framework-panel">
+              <div class="panel-head">
+                <div><span class="step-label">Framework</span><h3>Seven evidence domains</h3></div>
+                <span class="pill">AGE v1.0</span>
+              </div>
+              <p class="muted">Each domain examines a distinct aspect of the evidence disclosed in the provided documentation.</p>
+              <div id="lens-list" class="lens-list"></div>
+            </aside>
+          </div>
+
+          <section id="results-state" class="results-state hidden">
+            <div class="results-toolbar">
+              <div><span class="step-label">Review complete</span><h2 id="results-title">Governance evidence brief</h2></div>
+              <div class="results-actions">
+                <button class="button secondary" id="edit-document">Edit document</button>
+                <button class="button secondary" id="copy-review">Copy brief</button>
+                <button class="button secondary" id="download-text">Download .txt</button>
+                <button class="button primary" id="download-markdown">Download .md</button>
+              </div>
+            </div>
+            <p class="export-status" id="export-status" aria-live="polite"></p>
+            <div class="copy-fallback hidden" id="copy-fallback">
+              <div><strong>Copy the governance brief</strong><span>Press Ctrl+C or Command+C, then close this panel.</span></div>
+              <textarea id="copy-fallback-text" readonly aria-label="Governance brief ready to copy"></textarea>
+              <button class="button secondary" id="close-copy-fallback">Close</button>
+            </div>
+            <div class="output-boundary">
+              <span class="callout-icon">i</span>
+              <p><strong>Evidence boundary:</strong> AGE evaluates only the text provided. An absent disclosure should be treated as “not found in the provided text,” not as proof that the evidence does not exist.</p>
+            </div>
+            <div class="summary-grid">
+              <article class="score-card dark">
+                <span class="eyebrow">Overall documentation completeness</span>
+                <div class="score-row"><strong id="overall-score">0</strong><span>/ 100</span></div>
+                <p id="score-description"></p>
+                <div class="score-bar"><span id="score-bar"></span></div>
+              </article>
+              <article class="summary-card">
+                <span class="eyebrow">Executive summary</span>
+                <p id="executive-summary"></p>
+              </article>
+            </div>
+            <section class="panel completeness-panel">
+              <div class="panel-head">
+                <div><span class="step-label">Documentation only</span><h3>Documentation completeness</h3></div>
+                <span class="pill">Not a system rating</span>
+              </div>
+              <p class="muted score-intro">These scores evaluate the completeness and clarity of the documentation provided. They do not evaluate the AI system itself.</p>
+              <div id="documentation-scores" class="documentation-scores"></div>
+            </section>
+            <div id="results-grid" class="brief-sections"></div>
+            <div class="bottom-grid">
+              <section class="panel questions-panel">
+                <div class="panel-head"><div><span class="step-label">Follow-up questions</span><h3>Questions for the document owner</h3></div></div>
+                <ol id="questions-list"></ol>
+              </section>
+              <section class="panel next-panel">
+                <div class="panel-head"><div><span class="step-label">Recommended</span><h3>Next documents to review</h3></div></div>
+                <div id="next-documents"></div>
+              </section>
+            </div>
+            <p class="disclaimer">Created by AQ’S Corner LLC as part of the AI Governance Evidence (AGE) Methodology project. · Version 1.0<br />AGE provides a structured documentation review, not a compliance determination, legal conclusion, audit opinion, or assessment of system performance. © 2026 AQ’S Corner LLC.</p>
+          </section>
+        </section>
+
+        <section id="methodology-view" class="view">
+          <div class="content-page">
+            <span class="eyebrow">AGE Methodology · Version 1.0</span>
+            <h2>AI Governance Evidence (AGE) Methodology</h2>
+            <p class="lead">AGE is a practical governance methodology for evaluating publicly available AI governance evidence.</p>
+            <div class="methodology-statement">
+              <span class="eyebrow">Core principle</span>
+              <h3>Evaluate what is disclosed, not what is merely implied.</h3>
+              <p>AGE does not determine whether an AI system is fair, unfair, compliant, or noncompliant. AGE helps reviewers evaluate the quality, scope, transparency, and completeness of the governance evidence available in the documentation provided.</p>
+            </div>
+            <div class="principles-grid">
+              <article><span>01</span><h3>Evidence over assumption</h3><p>Findings are limited to what the provided text explicitly supports.</p></article>
+              <article><span>02</span><h3>Absence is not proof</h3><p>“Not found in the provided text” means additional documentation may be needed.</p></article>
+              <article><span>03</span><h3>Documentation, not verdicts</h3><p>Scores assess documentation completeness and do not make legal or performance conclusions.</p></article>
+            </div>
+            <div class="output-boundary methodology-boundary"><span class="callout-icon">i</span><p><strong>Evidence boundary:</strong> AGE evaluates only the text provided. An absent disclosure should be treated as “not found in the provided text,” not as proof that the evidence does not exist.</p></div>
+            <div class="methodology-detail" id="methodology-detail"></div>
+            <section class="about-age">
+              <span class="eyebrow">About AGE</span>
+              <h3>An evolving governance methodology</h3>
+              <p>The AI Governance Evidence (AGE) Methodology is an evolving governance methodology developed by AQ'S Corner LLC. It is designed to help reviewers evaluate publicly available AI governance evidence using a structured, evidence-based review process. The methodology will continue to evolve as additional governance artifacts and real-world documentation are evaluated.</p>
+            </section>
+            <p class="about-note">Created by AQ’S Corner LLC as part of the AI Governance Evidence (AGE) Methodology project. · Version 1.0</p>
+          </div>
+        </section>
+
+        <section id="history-view" class="view">
+          <div class="history-page">
+            <div class="history-heading"><div><span class="eyebrow">Local evidence trail</span><h2>Review history</h2><p>Completed reviews are stored only in this browser.</p></div><button class="button primary" data-view-link="workspace">Start a review</button></div>
+            <div id="history-list" class="history-list"></div>
+          </div>
+          <div class="empty-state" id="history-empty">
+            <div class="empty-icon">◷</div>
+            <h2>No completed reviews yet</h2>
+            <p>Analyze a document to create your first local review record.</p>
+            <button class="button primary" data-view-link="workspace">Start a review</button>
+          </div>
+        </section>
+      </main>
+    </div>
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>
